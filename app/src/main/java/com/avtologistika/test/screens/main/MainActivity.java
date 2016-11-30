@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.avtologistika.test.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.MainView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
