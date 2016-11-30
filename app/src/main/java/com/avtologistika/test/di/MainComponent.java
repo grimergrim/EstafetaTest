@@ -1,6 +1,6 @@
 package com.avtologistika.test.di;
 
-import com.avtologistika.test.screens.LoginActivity;
+import com.avtologistika.test.screens.login.LoginActivity;
 
 import javax.inject.Singleton;
 
