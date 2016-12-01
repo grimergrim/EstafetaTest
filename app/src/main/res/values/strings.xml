@@ -36,5 +36,6 @@
     <string name="task_survey_point_title">Survey point</string>
     <string name="search_title">Search</string>
     <string name="search_hint">input number</string>
+    <string name="no_results">No results</string>
 
 </resources>
