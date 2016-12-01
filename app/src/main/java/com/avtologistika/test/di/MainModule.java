@@ -6,6 +6,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.avtologistika.test.GlobalApplication;
+import com.avtologistika.test.screens.login.LoginContract;
+import com.avtologistika.test.screens.login.LoginPresenter;
+import com.avtologistika.test.utils.InMemoryCache;
+import com.avtologistika.test.utils.NetworkChecker;
+import com.avtologistika.test.utils.NetworkCheckerImpl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,6 +33,17 @@ public class MainModule {
     public MainModule(String baseUrl, GlobalApplication globalApplication) {
         this.baseUrl = baseUrl;
         this.globalApplication = globalApplication;
+    }
+
+    @Provides
+    Context getContext() {
+        return globalApplication;
+    }
+
+    @Provides
+    @Singleton
+    Gson provideGson() {
+        return new GsonBuilder().create();
     }
 
     @Provides
@@ -63,13 +79,19 @@ public class MainModule {
 
     @Provides
     @Singleton
-    Gson provideGson() {
-        return new GsonBuilder().create();
+    NetworkChecker provideNetworkChecker(Context context) {
+        return new NetworkCheckerImpl(context);
     }
 
     @Provides
-    Context getContext() {
-        return globalApplication;
+    @Singleton
+    LoginContract.LoginPresenter provideLoginPresenter(InMemoryCache inMemoryCache) {
+        return new LoginPresenter(inMemoryCache);
     }
 
+    @Provides
+    @Singleton
+    InMemoryCache provideInMemoryCache() {
+        return  new InMemoryCache();
+    }
 }

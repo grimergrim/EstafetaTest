@@ -1,6 +1,7 @@
 package com.avtologistika.test;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.avtologistika.test.api.Constants;
 import com.avtologistika.test.di.DaggerMainComponent;
@@ -20,6 +21,11 @@ public class GlobalApplication extends Application {
                 .builder()
                 .mainModule(new MainModule(Constants.BASE_URL, this))
                 .build();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
     }
 
     public MainComponent getMainComponent() {

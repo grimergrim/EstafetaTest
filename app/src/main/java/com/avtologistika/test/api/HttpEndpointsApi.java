@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 public interface HttpEndpointsApi {
 
     @GET("/api/mobilesurveytasks/gettestsurveytasks")
-    Call<List<Task>> getTasks();
+    Call<List<Task>> getTasksAndLogin();
 
 }
 

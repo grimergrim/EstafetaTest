@@ -5,9 +5,11 @@ import android.util.Log;
 import com.avtologistika.test.ServiceGenerator;
 import com.avtologistika.test.api.HttpEndpointsApi;
 import com.avtologistika.test.entities.Task;
-import com.avtologistika.test.screens.main.MainContract;
+import com.avtologistika.test.utils.InMemoryCache;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,33 +17,42 @@ import retrofit2.Response;
 
 public class LoginPresenter implements LoginContract.LoginPresenter {
 
-    private MainContract.MainView mMainView;
+    private LoginContract.LoginView mLoginView;
+    private InMemoryCache mInMemoryCache;
 
-    @Override
-    public void setVIew(MainContract.MainView view) {
-        mMainView = view;
+    @Inject
+    public LoginPresenter(InMemoryCache inMemoryCache) {
+        mInMemoryCache = inMemoryCache;
     }
 
     @Override
-    public void basicLogin(String login, String password) {
+    public void setVIew(LoginContract.LoginView view) {
+        mLoginView = view;
+    }
 
+    @Override
+    public void getTasksAndLogin(String login, String password) {
         HttpEndpointsApi loginService =
                 ServiceGenerator.createService(HttpEndpointsApi.class,
                         "estafeta@9F346DDB-8FF8-4F42-8221-6E03D6491756", "1");
-        Call<List<Task>> call = loginService.getTasks();
+        Call<List<Task>> call = loginService.getTasksAndLogin();
         call.enqueue(new Callback<List<Task>>() {
             @Override
             public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
-                if (response.isSuccessful()) {
-                    // user object available
+                if (response.isSuccessful() && null != response.body()) {
+                    mInMemoryCache.setTaskList(response.body());
+                    if (null != mLoginView)
+                        mLoginView.goToTaskList();
                 } else {
-                    // error response, no access to resource?
+                    if (null != mLoginView)
+                        mLoginView.showError();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Task>> call, Throwable t) {
-                // something went completely south (like no internet connection)
+                if (null != mLoginView)
+                    mLoginView.goToTaskList();
                 Log.d("Error", t.getMessage());
             }
         });
