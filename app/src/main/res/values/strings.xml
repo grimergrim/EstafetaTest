@@ -19,6 +19,6 @@
     <string name="error_connection">Connection error</string>
     <string name="default_login">estafeta</string>
     <string name="toolbat_title">ESTAFETA</string>
-
+    <string name="toolbat_subtitle">Single company demo</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.avtologistika.test.GlobalApplication;
+import com.avtologistika.test.api.HttpEndpointsApi;
 import com.avtologistika.test.screens.login.LoginContract;
 import com.avtologistika.test.screens.login.LoginPresenter;
 import com.avtologistika.test.utils.InMemoryCache;
@@ -85,8 +86,14 @@ public class MainModule {
 
     @Provides
     @Singleton
-    LoginContract.LoginPresenter provideLoginPresenter(InMemoryCache inMemoryCache) {
-        return new LoginPresenter(inMemoryCache);
+    LoginContract.LoginPresenter provideLoginPresenter(InMemoryCache inMemoryCache, HttpEndpointsApi httpService) {
+        return new LoginPresenter(inMemoryCache, httpService);
+    }
+
+    @Provides
+    @Singleton
+    HttpEndpointsApi provideApiEndpointInterface(Retrofit retrofit) {
+        return retrofit.create(HttpEndpointsApi.class);
     }
 
     @Provides

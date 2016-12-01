@@ -46,8 +46,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         setContentView(R.layout.activity_login);
         findViews();
         setListeners();
-        if (null != mToolbar)
+        if (null != mToolbar) {
             mToolbar.setTitle(R.string.toolbat_title);
+            mToolbar.setSubtitle(R.string.toolbat_subtitle);
+        }
     }
 
     private boolean isLoginValid(String login) {
