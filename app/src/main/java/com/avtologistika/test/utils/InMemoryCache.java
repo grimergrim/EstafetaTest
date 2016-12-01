@@ -29,7 +29,6 @@ public class InMemoryCache {
 
     public List<Task> search(String query) {
         List<Task> results = new ArrayList<>();
-
         for (Task task : mTaskList) {
             if (null != task.getNumber()
                     && task.getNumber().toLowerCase().contains(query.toLowerCase())
@@ -59,7 +58,7 @@ public class InMemoryCache {
                 results.add(task);
             }
         }
-
+        mSearchResultTaskList = results;
         return results;
     }
 }
