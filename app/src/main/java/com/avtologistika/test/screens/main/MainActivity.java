@@ -58,4 +58,5 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return true;
     }
+
 }

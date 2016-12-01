@@ -62,6 +62,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onClick(View v) {
+        //TODO pass real task id to method below
         mMainView.openTask(1);
     }
 
