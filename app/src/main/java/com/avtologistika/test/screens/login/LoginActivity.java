@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.avtologistika.test.GlobalApplication;
 import com.avtologistika.test.R;
 import com.avtologistika.test.api.Constants;
-import com.avtologistika.test.screens.task.TaskActivity;
+import com.avtologistika.test.screens.main.MainActivity;
 import com.avtologistika.test.utils.NetworkChecker;
 
 import javax.inject.Inject;
@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
     @Override
     public void goToTaskList() {
-        Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
 

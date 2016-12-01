@@ -1,4 +1,4 @@
-package com.avtologistika.test.screens.main;
+package com.avtologistika.test.screens.main.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ScrollView;
+import android.widget.RelativeLayout;
 
 import com.avtologistika.test.R;
 import com.avtologistika.test.entities.Task;
@@ -60,11 +60,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     static class TaskViewHolder extends RecyclerView.ViewHolder {
 
-        ScrollView container;
+        RelativeLayout container;
 
         TaskViewHolder(View v) {
             super(v);
-            container = (ScrollView) v.findViewById(R.id.task_container);
+            container = (RelativeLayout) v.findViewById(R.id.task_container);
         }
 
         void clearAnimation() {
