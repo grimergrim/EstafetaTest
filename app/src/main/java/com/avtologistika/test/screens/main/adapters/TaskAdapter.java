@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.avtologistika.test.R;
 import com.avtologistika.test.entities.Task;
+import com.avtologistika.test.screens.main.MainContract;
 
 import java.util.List;
 
@@ -19,10 +22,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     private List<Task> mTaskList;
     private Context mContext;
+    private MainContract.MainView mMainView;
 
-    public TaskAdapter(List<Task> taskList, Context context) {
+    public TaskAdapter(List<Task> taskList, Context context, MainContract.MainView mainView) {
         this.mTaskList = taskList;
         this.mContext = context;
+        this.mMainView = mainView;
     }
 
     @Override
@@ -32,6 +37,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(TaskViewHolder taskViewHolder, int position) {
+        taskViewHolder.mCarrierNameView.setText(mTaskList.get(position).getCarrier());
+        taskViewHolder.mDriverNameView.setText(mTaskList.get(position).getDriver());
         if (position % 2 == 0) {
             slideInAnimation(taskViewHolder.container, true);
         } else {
@@ -55,16 +62,22 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onClick(View v) {
-        //TODo implement listener
+        mMainView.openTask(1);
     }
 
     static class TaskViewHolder extends RecyclerView.ViewHolder {
 
         RelativeLayout container;
+        ImageView mCarrierLogoView;
+        TextView mCarrierNameView;
+        TextView mDriverNameView;
 
         TaskViewHolder(View v) {
             super(v);
             container = (RelativeLayout) v.findViewById(R.id.task_container);
+            mCarrierLogoView = (ImageView) v.findViewById(R.id.carrier_logo);
+            mCarrierNameView = (TextView) v.findViewById(R.id.carrier_name);
+            mDriverNameView = (TextView) v.findViewById(R.id.driver_name);
         }
 
         void clearAnimation() {

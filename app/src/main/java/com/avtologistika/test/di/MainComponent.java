@@ -2,6 +2,7 @@ package com.avtologistika.test.di;
 
 import com.avtologistika.test.screens.login.LoginActivity;
 import com.avtologistika.test.screens.main.MainActivity;
+import com.avtologistika.test.screens.task.TaskActivity;
 
 import javax.inject.Singleton;
 
@@ -13,5 +14,6 @@ public interface MainComponent {
 
     void inject(LoginActivity loginActivity);
     void inject(MainActivity mainActivity);
+    void inject(TaskActivity taskActivity);
 
 }

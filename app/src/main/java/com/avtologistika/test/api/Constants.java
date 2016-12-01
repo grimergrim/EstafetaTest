@@ -8,6 +8,7 @@ public interface Constants {
     String HTTP_HEADER_AUTHORIZATION = "Authorization";
     String HTTP_ACCEPT_TYPE = "application/json";
     String LOG_ERROR_TAG = "Error";
+    String EXTRA_TASK_ID = "taskId";
     int MIN_PASSWORD_LENGTH = 1;
     int MIN_LOGIN_LENGTH = 1;
 

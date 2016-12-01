@@ -21,5 +21,18 @@
     <string name="toolbat_title">ESTAFETA</string>
     <string name="toolbat_subtitle">Single company demo</string>
     <string name="carrier_logo_descrtiption">Carrier logo</string>
+    <string name="task_id_title">id:</string>
+    <string name="task_number_title">Number</string>
+    <string name="task_carrier_title">Carrier:</string>
+    <string name="task_driver_title">Driver:</string>
+    <string name="task_vin_title">Vin:</string>
+    <string name="task_model_title">Model:</string>
+    <string name="task_model_code_title">Model code:</string>
+    <string name="task_brand_title">Brand:</string>
+    <string name="task_planned_start_date_title">Planned start date:</string>
+    <string name="task_planned_end_date_title">Planned end date:</string>
+    <string name="task_actual_start_date_title">Actual start date:</string>
+    <string name="task_actual_end_date_title">Actual end date:</string>
+    <string name="task_survey_point_title">Survey point</string>
 
 </resources>

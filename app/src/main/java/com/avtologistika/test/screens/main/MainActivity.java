@@ -1,5 +1,6 @@
 package com.avtologistika.test.screens.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.avtologistika.test.GlobalApplication;
 import com.avtologistika.test.R;
+import com.avtologistika.test.api.Constants;
 import com.avtologistika.test.screens.main.adapters.TaskAdapter;
+import com.avtologistika.test.screens.task.TaskActivity;
 import com.avtologistika.test.utils.InMemoryCache;
 
 import javax.inject.Inject;
@@ -29,8 +32,15 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         recyclerView.setLayoutManager(linearLayoutManager);
         if (mInMemoryCache.getTaskList().size() > 0) {
             TaskAdapter taskAdapter = new TaskAdapter(mInMemoryCache.getTaskList(),
-                    getApplicationContext());
+                    getApplicationContext(), this);
             recyclerView.setAdapter(taskAdapter);
         }
+    }
+
+    @Override
+    public void openTask(int id) {
+        Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
+        intent.putExtra(Constants.EXTRA_TASK_ID, id);
+        startActivity(intent);
     }
 }

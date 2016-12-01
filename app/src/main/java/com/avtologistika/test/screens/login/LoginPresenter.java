@@ -1,7 +1,6 @@
 package com.avtologistika.test.screens.login;
 
 import android.util.Base64;
-import android.util.Log;
 
 import com.avtologistika.test.ServiceGenerator;
 import com.avtologistika.test.api.Constants;
@@ -65,7 +64,6 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
             public void onFailure(Call<List<Task>> call, Throwable t) {
                 if (null != mLoginView)
                     mLoginView.showError();
-                Log.d(Constants.LOG_ERROR_TAG, t.getMessage());
             }
         });
 
