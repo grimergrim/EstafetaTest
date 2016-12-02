@@ -1,7 +1,5 @@
 package com.avtologistika.test.screens.login;
 
-import android.util.Base64;
-
 import com.avtologistika.test.ServiceGenerator;
 import com.avtologistika.test.api.Constants;
 import com.avtologistika.test.api.HttpEndpointsApi;
@@ -20,12 +18,10 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
 
     private LoginContract.LoginView mLoginView;
     private InMemoryCache mInMemoryCache;
-//    private HttpEndpointsApi mHttpService;
 
     @Inject
-    public LoginPresenter(InMemoryCache inMemoryCache, HttpEndpointsApi httpService) {
+    public LoginPresenter(InMemoryCache inMemoryCache) {
         mInMemoryCache = inMemoryCache;
-//        mHttpService = httpService;
     }
 
     @Override
@@ -37,12 +33,7 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
     public void getTasksAndLogin(String login, String password) {
         HttpEndpointsApi loginService =
                 ServiceGenerator.createService(HttpEndpointsApi.class,
-                        login + "@9F346DDB-8FF8-4F42-8221-6E03D6491756", password);
-        String credentials = encodeLoginCredentials(login, Constants.DEFAULT_COMPANY_ID, password);
-
-//        Map<String, String> headers = new HashMap<>();
-//        headers.put(Constants.HTTP_HEADER_ACCEPT, Constants.HTTP_ACCEPT_TYPE);
-//        headers.put(Constants.HTTP_HEADER_AUTHORIZATION, credentials);
+                        login + Constants.DEFAULT_COMPANY_ID, password);
 
         Call<List<Task>> call = loginService.getTasksAndLogin();
         call.enqueue(new Callback<List<Task>>() {
@@ -52,7 +43,6 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
                     mInMemoryCache.setTaskList(response.body());
                     if (null != mLoginView) {
                         mLoginView.goToTaskList();
-//                        mLoginView.showProgress(false);
                     }
                 } else {
                     if (null != mLoginView) {
@@ -71,11 +61,6 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
             }
         });
 
-    }
-
-    private String encodeLoginCredentials(String login, String companyId, String password) {
-        String credentials = login + "@" + companyId + ":" + password;
-        return "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
     }
 
 }

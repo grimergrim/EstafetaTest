@@ -12,7 +12,7 @@ import com.avtologistika.test.utils.InMemoryCache;
 
 import javax.inject.Inject;
 
-public class TaskActivity extends AppCompatActivity implements TaskContract.TaskView {
+public class TaskActivity extends AppCompatActivity {
 
     private int currentTaskIndex;
     private TextView mIdView;

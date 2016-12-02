@@ -33,10 +33,6 @@ public class InMemoryCache {
         return mSearchResultTaskList;
     }
 
-    public void setSearchResultTaskList(List<Task> searchResultTaskList) {
-        mSearchResultTaskList = searchResultTaskList;
-    }
-
     public List<Task> search(String query) {
         List<Task> results = new ArrayList<>();
         for (Task task : mTaskList) {

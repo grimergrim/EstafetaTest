@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
                 new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         if (mInMemoryCache.getTaskList().size() > 0) {
-            TaskAdapter taskAdapter = new TaskAdapter(mInMemoryCache.getTaskList(),
-                    getApplicationContext(), this);
+            TaskAdapter taskAdapter = new TaskAdapter(mInMemoryCache.getTaskList(), this);
             recyclerView.setAdapter(taskAdapter);
         }
     }
@@ -70,16 +69,14 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener()
-        {
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextChange(String newText)
-            {
+            public boolean onQueryTextChange(String newText) {
                 return true;
             }
+
             @Override
-            public boolean onQueryTextSubmit(String query)
-            {
+            public boolean onQueryTextSubmit(String query) {
                 List<Task> searchResults = mInMemoryCache.search(query);
                 if (null != searchResults && searchResults.size() > 0) {
                     mInMemoryCache.setSearchQuery(query);
@@ -101,12 +98,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
     protected void onResume() {
         super.onResume();
         overridePendingTransition(R.anim.fade_in_from_left, R.anim.fade_out_to_right);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        overridePendingTransition(R.anim.fade_in_from_left, R.anim.fade_out_to_right);
     }
 
     private void findViews() {

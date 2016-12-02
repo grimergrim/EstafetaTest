@@ -86,8 +86,8 @@ public class MainModule {
 
     @Provides
     @Singleton
-    LoginContract.LoginPresenter provideLoginPresenter(InMemoryCache inMemoryCache, HttpEndpointsApi httpService) {
-        return new LoginPresenter(inMemoryCache, httpService);
+    LoginContract.LoginPresenter provideLoginPresenter(InMemoryCache inMemoryCache) {
+        return new LoginPresenter(inMemoryCache);
     }
 
     @Provides

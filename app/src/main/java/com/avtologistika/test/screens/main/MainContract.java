@@ -6,8 +6,4 @@ public interface MainContract {
         void openTask(int id);
     }
 
-    interface MainPresenter {
-
-    }
-
 }

@@ -2,6 +2,8 @@ package com.avtologistika.test;
 
 import android.util.Base64;
 
+import com.avtologistika.test.api.Constants;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -13,7 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    public static final String API_BASE_URL = "http://amt1.estafeta.org/api/mobilesurveytasks/gettestsurveytasks/";
+    private static final String API_BASE_URL =
+            "http://amt1.estafeta.org/api/mobilesurveytasks/gettestsurveytasks/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -21,10 +24,6 @@ public class ServiceGenerator {
             new Retrofit.Builder()
                     .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
-
-    public static <S> S createService(Class<S> serviceClass) {
-        return createService(serviceClass, null, null);
-    }
 
     public static <S> S createService(Class<S> serviceClass, String username, String password) {
         if (username != null && password != null) {
@@ -38,8 +37,8 @@ public class ServiceGenerator {
                     Request original = chain.request();
 
                     Request.Builder requestBuilder = original.newBuilder()
-                            .header("Authorization", basic)
-                            .header("Accept", "application/json")
+                            .header(Constants.HTTP_HEADER_AUTHORIZATION, basic)
+                            .header(Constants.HTTP_HEADER_ACCEPT, Constants.HTTP_ACCEPT_TYPE)
                             .method(original.method(), original.body());
 
                     Request request = requestBuilder.build();

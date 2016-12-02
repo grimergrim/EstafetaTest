@@ -43,8 +43,7 @@ public class SearchResultsActivity extends AppCompatActivity implements MainCont
         recyclerView.setLayoutManager(linearLayoutManager);
         if (null != mInMemoryCache.getSearchResultTaskList()
                 && mInMemoryCache.getSearchResultTaskList().size() > 0) {
-            TaskAdapter taskAdapter = new TaskAdapter(mInMemoryCache.getSearchResultTaskList(),
-                    getApplicationContext(), this);
+            TaskAdapter taskAdapter = new TaskAdapter(mInMemoryCache.getSearchResultTaskList(), this);
             recyclerView.setAdapter(taskAdapter);
         }
     }

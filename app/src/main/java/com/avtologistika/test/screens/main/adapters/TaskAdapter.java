@@ -1,11 +1,9 @@
 package com.avtologistika.test.screens.main.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,12 +16,10 @@ import java.util.List;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
     private List<Task> mTaskList;
-    private Context mContext;
     private MainContract.MainView mMainView;
 
-    public TaskAdapter(List<Task> taskList, Context context, MainContract.MainView mainView) {
+    public TaskAdapter(List<Task> taskList, MainContract.MainView mainView) {
         this.mTaskList = taskList;
-        this.mContext = context;
         this.mMainView = mainView;
     }
 
@@ -65,7 +61,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     static class TaskViewHolder extends RecyclerView.ViewHolder {
 
         private RelativeLayout container;
-        private ImageView mCarrierLogoView;
         private TextView mCarrierNameView;
         private TextView mDriverNameView;
         private TextView mNumberView;
@@ -73,7 +68,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         TaskViewHolder(View v) {
             super(v);
             container = (RelativeLayout) v.findViewById(R.id.task_container);
-            mCarrierLogoView = (ImageView) v.findViewById(R.id.carrier_logo);
             mCarrierNameView = (TextView) v.findViewById(R.id.carrier_name);
             mDriverNameView = (TextView) v.findViewById(R.id.driver_name);
             mNumberView = (TextView) v.findViewById(R.id.number);
