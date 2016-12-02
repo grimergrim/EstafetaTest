@@ -1,19 +1,12 @@
 package com.avtologistika.test.screens.login;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avtologistika.test.GlobalApplication;
@@ -70,15 +63,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     }
 
     private void setListeners() {
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    return true;
-                }
-                return false;
-            }
-        });
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
                     showToast(getResources().getString(R.string.error_no_internet));
                 }
                 if (isLoginValid && isPasswordValid && isNetworkConnected) {
+                    showProgress(true);
                     mLoginPresenter.getTasksAndLogin(login, password);
                 }
             }
@@ -109,31 +94,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
 
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
+    @Override
+    public void showProgress(boolean show) {
+        if (show) {
+            mLoginFormView.setVisibility(View.GONE);
+            mProgressView.setVisibility(View.VISIBLE);
         } else {
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mLoginFormView.setVisibility(View.VISIBLE);
+            mProgressView.setVisibility(View.GONE);
         }
     }
 
@@ -157,6 +125,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
     @Override
     protected void onResume() {
         super.onResume();
+        showProgress(false);
         mLoginPresenter.setVIew(this);
     }
 }

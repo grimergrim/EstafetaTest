@@ -8,9 +8,7 @@ import com.avtologistika.test.api.HttpEndpointsApi;
 import com.avtologistika.test.entities.Task;
 import com.avtologistika.test.utils.InMemoryCache;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -22,12 +20,12 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
 
     private LoginContract.LoginView mLoginView;
     private InMemoryCache mInMemoryCache;
-    private HttpEndpointsApi mHttpService;
+//    private HttpEndpointsApi mHttpService;
 
     @Inject
     public LoginPresenter(InMemoryCache inMemoryCache, HttpEndpointsApi httpService) {
         mInMemoryCache = inMemoryCache;
-        mHttpService = httpService;
+//        mHttpService = httpService;
     }
 
     @Override
@@ -39,12 +37,12 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
     public void getTasksAndLogin(String login, String password) {
         HttpEndpointsApi loginService =
                 ServiceGenerator.createService(HttpEndpointsApi.class,
-                        "estafeta@9F346DDB-8FF8-4F42-8221-6E03D6491756", "1");
+                        login + "@9F346DDB-8FF8-4F42-8221-6E03D6491756", password);
         String credentials = encodeLoginCredentials(login, Constants.DEFAULT_COMPANY_ID, password);
 
-        Map<String, String> headers = new HashMap<>();
-        headers.put(Constants.HTTP_HEADER_ACCEPT, Constants.HTTP_ACCEPT_TYPE);
-        headers.put(Constants.HTTP_HEADER_AUTHORIZATION, credentials);
+//        Map<String, String> headers = new HashMap<>();
+//        headers.put(Constants.HTTP_HEADER_ACCEPT, Constants.HTTP_ACCEPT_TYPE);
+//        headers.put(Constants.HTTP_HEADER_AUTHORIZATION, credentials);
 
         Call<List<Task>> call = loginService.getTasksAndLogin();
         call.enqueue(new Callback<List<Task>>() {
@@ -52,18 +50,24 @@ public class LoginPresenter implements LoginContract.LoginPresenter {
             public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
                 if (response.isSuccessful() && null != response.body()) {
                     mInMemoryCache.setTaskList(response.body());
-                    if (null != mLoginView)
+                    if (null != mLoginView) {
                         mLoginView.goToTaskList();
+//                        mLoginView.showProgress(false);
+                    }
                 } else {
-                    if (null != mLoginView)
+                    if (null != mLoginView) {
                         mLoginView.showError();
+                        mLoginView.showProgress(false);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Task>> call, Throwable t) {
-                if (null != mLoginView)
+                if (null != mLoginView) {
                     mLoginView.showError();
+                    mLoginView.showProgress(false);
+                }
             }
         });
 

@@ -8,6 +8,8 @@ public interface LoginContract {
 
         void showError();
 
+        void showProgress(boolean show);
+
     }
 
     interface LoginPresenter {
