@@ -38,8 +38,6 @@ public class TaskActivity extends AppCompatActivity implements TaskContract.Task
         super.onCreate(savedInstanceState);
         ((GlobalApplication) this.getApplication()).getMainComponent().inject(this);
 
-
-
         setContentView(R.layout.activity_task);
         currentTaskIndex = getIntent().getIntExtra(Constants.EXTRA_TASK_ID, 0);
         findViews();

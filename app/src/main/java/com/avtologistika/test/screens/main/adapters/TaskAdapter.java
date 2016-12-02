@@ -17,8 +17,7 @@ import com.avtologistika.test.screens.main.MainContract;
 
 import java.util.List;
 
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder>
-        implements View.OnClickListener {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
     private List<Task> mTaskList;
     private Context mContext;
@@ -37,6 +36,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(TaskViewHolder taskViewHolder, int position) {
+        setListener(taskViewHolder, position);
         taskViewHolder.mCarrierNameView.setText(mTaskList.get(position).getCarrier());
         taskViewHolder.mDriverNameView.setText(mTaskList.get(position).getDriver());
         taskViewHolder.mNumberView.setText(mTaskList.get(position).getNumber());
@@ -52,14 +52,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public TaskViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.task_list_item, viewGroup, false);
-        itemView.setOnClickListener(this);
         return new TaskViewHolder(itemView);
     }
 
-    @Override
-    public void onClick(View v) {
-        //TODO pass real task id to method below
-        mMainView.openTask(1);
+    private void setListener(final TaskViewHolder taskViewHolder, final int position) {
+        taskViewHolder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainView.openTask(position);
+            }
+        });
     }
 
     static class TaskViewHolder extends RecyclerView.ViewHolder {
