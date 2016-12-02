@@ -38,5 +38,6 @@
     <string name="search_results">Search results on:</string>
     <string name="search_hint">input number</string>
     <string name="no_results">No results</string>
+    <string name="placeholder_for_unknown">unknown</string>
 
 </resources>

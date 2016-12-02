@@ -40,11 +40,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         taskViewHolder.mCarrierNameView.setText(mTaskList.get(position).getCarrier());
         taskViewHolder.mDriverNameView.setText(mTaskList.get(position).getDriver());
         taskViewHolder.mNumberView.setText(mTaskList.get(position).getNumber());
-        if (position % 2 == 0) {
-            slideInAnimation(taskViewHolder.container, true);
-        } else {
-            slideInAnimation(taskViewHolder.container, false);
-        }
     }
 
     @Override
