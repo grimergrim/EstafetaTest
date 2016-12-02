@@ -39,6 +39,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(TaskViewHolder taskViewHolder, int position) {
         taskViewHolder.mCarrierNameView.setText(mTaskList.get(position).getCarrier());
         taskViewHolder.mDriverNameView.setText(mTaskList.get(position).getDriver());
+        taskViewHolder.mNumberView.setText(mTaskList.get(position).getNumber());
         if (position % 2 == 0) {
             slideInAnimation(taskViewHolder.container, true);
         } else {
@@ -68,10 +69,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     static class TaskViewHolder extends RecyclerView.ViewHolder {
 
-        RelativeLayout container;
-        ImageView mCarrierLogoView;
-        TextView mCarrierNameView;
-        TextView mDriverNameView;
+        private RelativeLayout container;
+        private ImageView mCarrierLogoView;
+        private TextView mCarrierNameView;
+        private TextView mDriverNameView;
+        private TextView mNumberView;
 
         TaskViewHolder(View v) {
             super(v);
@@ -79,6 +81,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             mCarrierLogoView = (ImageView) v.findViewById(R.id.carrier_logo);
             mCarrierNameView = (TextView) v.findViewById(R.id.carrier_name);
             mDriverNameView = (TextView) v.findViewById(R.id.driver_name);
+            mNumberView = (TextView) v.findViewById(R.id.number);
         }
 
         void clearAnimation() {

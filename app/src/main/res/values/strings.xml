@@ -20,7 +20,7 @@
     <string name="default_login">estafeta</string>
     <string name="toolbat_title">ESTAFETA</string>
     <string name="toolbat_subtitle">Single company demo</string>
-    <string name="carrier_logo_descrtiption">Carrier logo</string>
+    <string name="color_bar_descrtiption">Just some color</string>
     <string name="task_id_title">id:</string>
     <string name="task_number_title">Number</string>
     <string name="task_carrier_title">Carrier:</string>
