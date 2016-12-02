@@ -104,4 +104,9 @@ public class TaskActivity extends AppCompatActivity implements TaskContract.Task
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        overridePendingTransition(R.anim.fade_in_from_right, R.anim.fade_out_to_left);
+    }
 }

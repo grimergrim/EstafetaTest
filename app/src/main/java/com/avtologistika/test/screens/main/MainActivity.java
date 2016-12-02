@@ -97,6 +97,18 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        overridePendingTransition(R.anim.fade_in_from_left, R.anim.fade_out_to_right);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        overridePendingTransition(R.anim.fade_in_from_left, R.anim.fade_out_to_right);
+    }
+
     private void findViews() {
         mToolbar = getSupportActionBar();
     }
