@@ -35,6 +35,7 @@
     <string name="task_actual_end_date_title">Actual end date:</string>
     <string name="task_survey_point_title">Survey point</string>
     <string name="search_title">Search</string>
+    <string name="search_results">Search results on:</string>
     <string name="search_hint">input number</string>
     <string name="no_results">No results</string>
 

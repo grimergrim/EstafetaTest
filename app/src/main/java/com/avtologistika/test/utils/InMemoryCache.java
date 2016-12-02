@@ -11,6 +11,16 @@ public class InMemoryCache {
 
     private List<Task> mSearchResultTaskList;
 
+    private String searchQuery;
+
+    public String getSearchQuery() {
+        return searchQuery;
+    }
+
+    public void setSearchQuery(String searchQuery) {
+        this.searchQuery = searchQuery;
+    }
+
     public List<Task> getTaskList() {
         return mTaskList;
     }

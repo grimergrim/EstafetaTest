@@ -2,6 +2,7 @@ package com.avtologistika.test.screens.search;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,8 @@ import javax.inject.Inject;
 
 public class SearchResultsActivity extends AppCompatActivity implements MainContract.MainView {
 
+    private ActionBar mToolbar;
+
     @Inject
     protected InMemoryCache mInMemoryCache;
 
@@ -26,6 +29,14 @@ public class SearchResultsActivity extends AppCompatActivity implements MainCont
         super.onCreate(savedInstanceState);
         ((GlobalApplication) this.getApplication()).getMainComponent().inject(this);
         setContentView(R.layout.activity_search_results);
+        findViews();
+
+        if (null != mToolbar) {
+            String toolbarTitle = getResources().getString(R.string.search_results);
+            mToolbar.setTitle(toolbarTitle + " " + mInMemoryCache.getSearchQuery());
+            mToolbar.setSubtitle(null);
+        }
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.tasks_recycler_view);
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getApplicationContext());
@@ -44,4 +55,9 @@ public class SearchResultsActivity extends AppCompatActivity implements MainCont
         intent.putExtra(Constants.EXTRA_TASK_ID, id);
         startActivity(intent);
     }
+
+    private void findViews() {
+        mToolbar = getSupportActionBar();
+    }
+
 }

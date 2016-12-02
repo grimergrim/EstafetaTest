@@ -1,6 +1,7 @@
 package com.avtologistika.test.screens.task;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class TaskActivity extends AppCompatActivity implements TaskContract.Task
     private TextView mActualStartDateView;
     private TextView mActualEndDateView;
     private TextView mSurveyPointView;
+    private ActionBar mToolbar;
 
     @Inject
     protected InMemoryCache mInMemoryCache;
@@ -35,10 +37,18 @@ public class TaskActivity extends AppCompatActivity implements TaskContract.Task
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((GlobalApplication) this.getApplication()).getMainComponent().inject(this);
+
+
+
         setContentView(R.layout.activity_task);
         currentTaskIndex = getIntent().getIntExtra(Constants.EXTRA_TASK_ID, 0);
         findViews();
         setTextToUi();
+
+        if (null != mToolbar) {
+            mToolbar.setTitle(R.string.toolbat_title);
+            mToolbar.setSubtitle(R.string.toolbat_subtitle);
+        }
     }
 
     private void findViews() {
@@ -55,6 +65,8 @@ public class TaskActivity extends AppCompatActivity implements TaskContract.Task
         mActualStartDateView = (TextView) findViewById(R.id.actual_start_date);
         mActualEndDateView = (TextView) findViewById(R.id.actual_end_date);
         mSurveyPointView = (TextView) findViewById(R.id.survey_point);
+        mToolbar = getSupportActionBar();
+
     }
 
     private void setTextToUi() {

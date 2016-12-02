@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,8 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements MainContract.MainView {
 
+    private ActionBar mToolbar;
+
     @Inject
     protected InMemoryCache mInMemoryCache;
 
@@ -35,6 +38,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         super.onCreate(savedInstanceState);
         ((GlobalApplication) this.getApplication()).getMainComponent().inject(this);
         setContentView(R.layout.activity_main);
+        findViews();
+
+        if (null != mToolbar) {
+            mToolbar.setTitle(R.string.toolbat_title);
+            mToolbar.setSubtitle(R.string.toolbat_subtitle);
+        }
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.tasks_recycler_view);
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getApplicationContext());
@@ -72,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
             {
                 List<Task> searchResults = mInMemoryCache.search(query);
                 if (null != searchResults && searchResults.size() > 0) {
+                    mInMemoryCache.setSearchQuery(query);
                     Intent intent = new Intent(getApplicationContext(), SearchResultsActivity.class);
                     startActivity(intent);
                 } else {
@@ -84,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.Main
         searchView.setOnQueryTextListener(queryTextListener);
         searchView.setIconifiedByDefault(true);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void findViews() {
+        mToolbar = getSupportActionBar();
     }
 
 }
