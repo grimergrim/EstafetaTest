@@ -1,25 +1,16 @@
 <resources>
     <string name="app_name">Test</string>
-
-    <!-- Strings related to login -->
     <string name="prompt_login">Login</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Login</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-
     <string name="error_wrong_login">Input correct login</string>
     <string name="error_no_internet">No internet</string>
     <string name="error_connection">Connection error</string>
     <string name="default_login">estafeta</string>
-    <string name="toolbat_title">ESTAFETA</string>
-    <string name="toolbat_subtitle">Single company demo</string>
+    <string name="toolbar_title">ESTAFETA</string>
+    <string name="toolbar_subtitle">Single company demo</string>
     <string name="color_bar_descrtiption">Just some color</string>
     <string name="task_id_title">id:</string>
     <string name="task_number_title">Number</string>
@@ -39,5 +30,4 @@
     <string name="search_hint">input number</string>
     <string name="no_results">No results</string>
     <string name="placeholder_for_unknown">unknown</string>
-
 </resources>

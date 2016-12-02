@@ -40,8 +40,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Lo
         findViews();
         setListeners();
         if (null != mToolbar) {
-            mToolbar.setTitle(R.string.toolbat_title);
-            mToolbar.setSubtitle(R.string.toolbat_subtitle);
+            mToolbar.setTitle(R.string.toolbar_title);
+            mToolbar.setSubtitle(R.string.toolbar_subtitle);
         }
     }
 
